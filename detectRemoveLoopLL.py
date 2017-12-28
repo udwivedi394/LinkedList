@@ -23,12 +23,18 @@ def removeLoop(root,loopNode):
 
 	while 1:
 		temp2 = loopNode
+		#Break loop if traverse Node reaches start of given loop (identified by LoopNode) or 
+		#it becomes equal to original start of loop (identified by temp1)
 		while temp2.next != loopNode and temp2.next != temp1:
 			temp2 = temp2.next
+
+		#Check there is second case for termination of above loop
 		if temp2.next == temp1:
+			#Remove the loop, break free
 			print "In the name of Holy Lord!, I'm Removing the Loop!!"
 			temp2.next = None
 			break
+		#Try again, advance the start traverse node to next
 		temp1 = temp1.next
 	return root
 
@@ -39,20 +45,25 @@ def removeLoop02(root,loopNode):
 	temp1 = root
 	temp2 = loopNode
 
+	#Count total number of nodes in the loop
 	countNodesinLoop = 0
 	while temp2.next != loopNode:
 		countNodesinLoop += 1
 		temp2 = temp2.next
 	
+	#Advance the hunter second traverse node from head of ll by countNodeinLoop
 	temp2 = root
 	while countNodesinLoop:
 		temp2 = temp2.next
 		countNodesinLoop -= 1
 
+	#Now, from here on move both the start and hunter Node at same pace
+	#If match, break the loop
 	while temp2.next != temp1:
 		temp2 = temp2.next
 		temp1 = temp1.next
-
+	
+	#Remove the loop
 	temp2.next = None
 	return root
 
