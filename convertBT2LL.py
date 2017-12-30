@@ -37,7 +37,7 @@ def inOrderTraverse(root):
 	return
 
 #This function converts given tree to Double Linked List in inOrder traversal fashion
-def convertBST2DLL(root):
+def convertBT2DLL(root):
 	temp = root
 	stack = []
 	prevNode = None
@@ -92,6 +92,6 @@ root.right.left = Node(36)
 
 inOrderTraverse(root)
 print
-head = convertBST2DLL(root)
+head = convertBT2DLL(root)
 print
 llTraversal(head)
