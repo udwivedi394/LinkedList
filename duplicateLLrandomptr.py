@@ -56,6 +56,35 @@ def duplicateLL(root):
 
 	return dhead
 
+#Time Complexity: O(n)
+#Space Complexity: O(1)
+def duplicateLL02(root):
+	node = root
+	
+	#Insert the duplicate node between the two nodes, after the first node
+	while node:
+		temp = node.next
+		node.next = Node(node.data)
+		node.next.next = temp
+		node = temp
+
+	#Assign the next of random of current node to the random of next of current node
+	node = root
+	while node:
+		node.next.random = node.random.next
+		node = node.next.next
+
+	#Segregate the two LLs
+	node = root
+	dhead = node.next
+	while node:
+		temp = node.next
+		node.next = node.next.next
+		if temp.next != None:
+			temp.next = temp.next.next
+		node = node.next	
+	return dhead
+
 def llTraversal(root):
 	temp = root
 	while temp:
@@ -65,7 +94,10 @@ def llTraversal(root):
 
 	temp = root
 	while temp:
-		print temp.random.data,"->",
+		if temp.random:
+			print temp.random.data,"->",
+		else:
+			print "N","->",
 		temp = temp.next
 	print "None"
 	return
@@ -84,7 +116,7 @@ h5.random = h2
 
 print "Orginal LL"
 llTraversal(root)
-dHead = duplicateLL(root)
+dHead = duplicateLL02(root)
 
 print "New LL"
 llTraversal(dHead)
